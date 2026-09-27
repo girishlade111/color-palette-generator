@@ -1,30 +1,89 @@
 # Color Palette Generator
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+A beautiful, interactive color palette generator for designers and developers. Pick a base color and instantly generate a full shade scale with accessibility (WCAG) contrast scores — then copy or export your palette with one click.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/gileb64375-5584s-projects/v0-color-palette-generator)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/RJjzLWivWmA)
+Originally generated with [v0.app](https://v0.app).
 
-## Overview
+## Features
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+- **Interactive color picker** — pick a base color via the visual color wheel (react-colorful) or enter a hex code directly
+- **Auto-generated shade scale** — full palette of shades derived from your base color with hue, saturation, and lightness values
+- **Contrast checking** — WCAG contrast ratios between palette colors, with pass/fail levels
+- **Tuning controls** — sliders for vibrancy and hue shift to fine-tune the generated palette
+- **Randomize** — one-click random palette generation
+- **Copy to clipboard** — click any color to copy its hex code
+- **Export / download** — download your palette for use in your project
+- **Dark / light mode** — app-level theme toggle (built on `next-themes`)
+- **Smooth animations** — Framer Motion transitions throughout the UI
+
+## Tech Stack
+
+- [Next.js 14](https://nextjs.org/) (App Router, static export)
+- [React 18](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/) + `tailwindcss-animate`
+- [shadcn/ui](https://ui.shadcn.com/) components (Radix UI primitives: slider, switch, popover, toast, label)
+- [react-colorful](https://github.com/omgovich/react-colorful) — color picker
+- [Framer Motion](https://www.framer.com/motion/) — animations
+- [Lucide](https://lucide.dev/) icons
+
+## Quick Start
+
+Requirements: Node.js 18+ and npm (or pnpm).
+
+```bash
+# install dependencies
+npm install
+
+# run the dev server
+npm run dev
+# open http://localhost:3000
+
+# build a static production bundle (outputs to ./out)
+npm run build
+```
+
+Serve the static build with any static host:
+
+```bash
+npx serve out
+```
+
+## Project Structure
+
+```
+app/
+  layout.tsx            # root layout (theme provider, fonts, metadata)
+  page.tsx              # home page -> renders the generator
+  globals.css           # Tailwind + global styles
+components/
+  color-palette-generator.tsx   # main palette generator UI (client component)
+  theme-provider.tsx            # next-themes wrapper
+  ui/                           # shadcn/ui primitives (button, slider, switch, toast, ...)
+lib/
+  utils.ts              # cn() class-name helper
+public/                 # static assets
+next.config.mjs         # Next.js config (static export, unoptimized images)
+tailwind.config.js      # Tailwind config
+components.json         # shadcn/ui config
+```
+
+## Environment Variables
+
+None. The app is fully client-side and needs no secrets or backend.
 
 ## Deployment
 
-Your project is live at:
+This app is statically exported (`output: 'export'` in `next.config.mjs`), so it deploys anywhere that serves static files:
 
-**[https://vercel.com/gileb64375-5584s-projects/v0-color-palette-generator](https://vercel.com/gileb64375-5584s-projects/v0-color-palette-generator)**
+- **Cloudflare Pages** — this repo deploys there as a static site (see homepage link)
+- **Vercel** — originally generated/synced from a v0.app deployment
+- **GitHub Pages / Netlify / any static host** — serve the `./out` directory produced by `npm run build`
 
-## Build your app
+## License
 
-Continue building your app on:
+MIT.
 
-**[https://v0.app/chat/projects/RJjzLWivWmA](https://v0.app/chat/projects/RJjzLWivWmA)**
+---
 
-## How It Works
-
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+Built by Girish Lade — [ladestack.in](https://ladestack.in)
